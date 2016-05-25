@@ -33,21 +33,32 @@ for i = 1:Num_cross
     test_all_together_feature = test_total(:,2+hiddenSize:1+hiddenSize+visibleSize);
     test_only_wind_feature = test_total(:,2+hiddenSize+visibleSize:1+hiddenSize+visibleSize+featurenum_wind);
 
-    fprintf ('start train with fushion features...\n') 
-    model_opt = svmtrain(train_label, train_opt_feature, '-s 3');
+    fprintf('\n')   
     fprintf ('start prediction...\n') 
-    [estlabel_opt{i},accurancy_opt{i}] = svmpredict(test_label,test_opt_feature,model_opt);
+    fprintf ('start train with fushion features...\n') 
+    model_opt = svmtrain(train_label, train_opt_feature, '-s 4');
+    fprintf('\n')   
+    fprintf ('start prediction...\n') 
+    [estlabel_opt{i}] = svmpredict(test_label,test_opt_feature,model_opt);
     
-    fprintf ('start train with fushion features...\n') 
-    model_all_together_feature = svmtrain(train_label, train_all_together_feature, '-s 3');
+    fprintf('\n')   
     fprintf ('start prediction...\n') 
-    [estlabel_all_together{i},accurancy_all_together{i}] = svmpredict(test_label,test_all_together_feature,model_all_together_feature);
-   
     fprintf ('start train with fushion features...\n') 
-    model_only_wind = svmtrain(train_label, train_only_wind_feature, '-s 3');
+    model_all_together_feature = svmtrain(train_label, train_all_together_feature, '-s 4');
+    fprintf('\n')   
     fprintf ('start prediction...\n') 
-    [estlabel_only_wind{i},accurancy_only_wind{i}] = svmpredict(test_label,test_only_wind_feature,model_only_wind);
+    [estlabel_all_together{i}] = svmpredict(test_label,test_all_together_feature,model_all_together_feature);
     
+    fprintf('\n')   
+    fprintf ('start train with fushion features...\n') 
+    model_only_wind = svmtrain(train_label, train_only_wind_feature, '-s 4');
+    fprintf('\n')   
+    fprintf ('start prediction...\n') 
+    [estlabel_only_wind{i}] = svmpredict(test_label,test_only_wind_feature,model_only_wind);
+    
+    fprintf('\n')   
+    fprintf ('start train with fushion features...\n') 
+    fprintf('\n')   
     % estlabel=estlabel';
     %Rsquare=accurancy(3);
     %Rsquare_vec(i)=Rsquare;
