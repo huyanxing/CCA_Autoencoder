@@ -11,14 +11,14 @@ settingsparseparameters;% path is:./settingsparseparameters.m
 netparameters = SplitAEtrain(data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,K);
 opt_feature = getOptFeatures(netparameters.W,netparameters.b, data);
 
-Num_cross = 2;
+Num_cross = 10;
 opt_feature = opt_feature';
 Dataset_for_CrossPart =[label,opt_feature,data',featureset_wind60];
 [ Trainset, Testset ] = NCrossPart (Dataset_for_CrossPart,Num_cross);
 %% using svm for the forecasting
+cross = 3;
 
-
-for i = 1:Num_cross
+for i = 1:cross
     train_total = Trainset{1,i};
     test_total = Testset{1,i};
     
@@ -43,21 +43,21 @@ for i = 1:Num_cross
     
     fprintf('\n')   
     fprintf ('start prediction...\n') 
-    fprintf ('start train with fushion features...\n') 
+    fprintf ('start train with no-fushion all features...\n') 
     model_all_together_feature = svmtrain(train_label, train_all_together_feature, '-s 4');
     fprintf('\n')   
     fprintf ('start prediction...\n') 
     [estlabel_all_together{i}] = svmpredict(test_label,test_all_together_feature,model_all_together_feature);
     
     fprintf('\n')   
-    fprintf ('start train with fushion features...\n') 
+    fprintf ('start train with wind_only features...\n') 
     model_only_wind = svmtrain(train_label, train_only_wind_feature, '-s 4');
     fprintf('\n')   
     fprintf ('start prediction...\n') 
     [estlabel_only_wind{i}] = svmpredict(test_label,test_only_wind_feature,model_only_wind);
     
     fprintf('\n')   
-    fprintf ('start train with fushion features...\n') 
+    fprintf ('finish a cross\n') 
     fprintf('\n')   
     % estlabel=estlabel';
     %Rsquare=accurancy(3);

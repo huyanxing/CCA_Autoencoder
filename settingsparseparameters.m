@@ -9,7 +9,7 @@
           data2 = featureset_mslp;
           data3 = featureset_temperature;
           data = [data1,data2,data3];
-          neuronnum = 7;
+          neuronnum = 12;
           subFeatureNum = [featurenum_wind,featurenum_mslp,featurenum_temperature];
 %% deal with missing value
           
@@ -20,8 +20,8 @@
           hiddenSize  = neuronnum;
 %floor(featurenum*0.5);
           sparsityParam = 0.05; % desired average activation of the hidden units.
-          lambda = 3e-3;         % weight decay parameter       
-          beta = 5;              % weight of sparsity penalty term       
+          lambda = 3e-2;         % weight decay parameter       
+          beta = 0;              % weight of sparsity penalty term       
           %epsilon = 0.1;	       % epsilon for ZCA whitening
 %%
           theta=initializeParameters(hiddenSize, visibleSize);
