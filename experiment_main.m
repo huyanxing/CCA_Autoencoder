@@ -16,7 +16,7 @@ opt_feature = opt_feature';
 Dataset_for_CrossPart =[label,opt_feature,data',featureset_wind60];
 [ Trainset, Testset ] = NCrossPart (Dataset_for_CrossPart,Num_cross);
 %% using svm for the forecasting
-cross = 3;
+cross = 1;
 
 for i = 1:cross
     train_total = Trainset{1,i};
@@ -34,7 +34,6 @@ for i = 1:cross
     test_only_wind_feature = test_total(:,2+hiddenSize+visibleSize:1+hiddenSize+visibleSize+featurenum_wind);
 
     fprintf('\n')   
-    fprintf ('start prediction...\n') 
     fprintf ('start train with fushion features...\n') 
     model_opt = svmtrain(train_label, train_opt_feature, '-s 4');
     fprintf('\n')   
@@ -42,7 +41,6 @@ for i = 1:cross
     [estlabel_opt{i}] = svmpredict(test_label,test_opt_feature,model_opt);
     
     fprintf('\n')   
-    fprintf ('start prediction...\n') 
     fprintf ('start train with no-fushion all features...\n') 
     model_all_together_feature = svmtrain(train_label, train_all_together_feature, '-s 4');
     fprintf('\n')   
