@@ -20,12 +20,12 @@
           hiddenSize  = neuronnum;
 %floor(featurenum*0.5);
           sparsityParam = 0.05; % desired average activation of the hidden units.
-          lambda = 3e-2;         % weight decay parameter       
+          lambda = 0.000003;         % weight decay parameter       
           beta = 0;              % weight of sparsity penalty term       
           %epsilon = 0.1;	       % epsilon for ZCA whitening
 %%
           theta=initializeParameters(hiddenSize, visibleSize);
-          K= featurenum_wind/2;
+          K= 10;
           [data,~] = scale(data);
           data = data';
          % SplitSparseAutoencoderCost(theta, visibleSize, hiddenSize, ...
