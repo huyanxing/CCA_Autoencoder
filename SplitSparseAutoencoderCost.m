@@ -1,5 +1,5 @@
 function [cost,grad] = SplitSparseAutoencoderCost(theta, visibleSize, hiddenSize, ...
-                                                            lambda, sparsityParam, beta, data,subFeatureNum,K)
+                                                            lambda, sparsityParam, beta, data,subFeatureNum,gamma,K)
 %%                                                         
 % Instructions:
 %   Copy sparseAutoencoderCost in sparseAutoencoderCost.m from your
@@ -85,7 +85,7 @@ grad_corr12_2 = grad_corr12_2';
 grad_corr13_1 = grad_corr13_1';
 grad_corr13_3 = grad_corr13_3';
 % Total error = least squre + regularization + CCA
-cost_main= cost_main-corr_12-corr_13;
+cost_main= cost_main-gamma*(corr_12+corr_13);
 cost=cost_main;
 %****** finish adjusting ************************** 
 %% *********start backpropagation for grad************
@@ -100,9 +100,9 @@ errorterm_corr_2= (grad_corr12_2).*sigmoidInv(z3_2);
 errorterm_corr_3= (grad_corr13_3).*sigmoidInv(z3_3);
 %errorterm all 
 %******** adjust by different conditions***********
-errorterm_3_1 = errorterm_data_1-sample_num*errorterm_corr_1;
-errorterm_3_2 = errorterm_data_2-sample_num*errorterm_corr_2;
-errorterm_3_3 = errorterm_data_3-sample_num*errorterm_corr_3;
+errorterm_3_1 = errorterm_data_1-gamma*sample_num*errorterm_corr_1;
+errorterm_3_2 = errorterm_data_2-gamma*sample_num*errorterm_corr_2;
+errorterm_3_3 = errorterm_data_3-gamma*sample_num*errorterm_corr_3;
 
 errorterm_3 = [];
 

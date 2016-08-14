@@ -8,7 +8,7 @@ preparedata;% path is :./pareparedata.m
 %% initialize paremeters
 settingsparseparameters;% path is:./settingsparseparameters.m
 %% start training
-netparameters = SplitAEtrain(data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,K);
+netparameters = SplitAEtrain(data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,gamma,K);
 opt_feature = getOptFeatures(netparameters.W,netparameters.b, data);
 
 Num_cross = 10;
