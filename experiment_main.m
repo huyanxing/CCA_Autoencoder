@@ -79,7 +79,7 @@ if isAE == 1
 end
 
 if isCRBM == 1    
-   hiddenSize= 5;    
+    hiddenSize= 5;    
     [model_opt,error]= crbmBB(featureset,hiddenSize);
     opt_feature = model_opt.top;
     Dataset_for_CrossPart =[label,opt_feature,featureset];
