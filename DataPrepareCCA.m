@@ -29,7 +29,7 @@ move = 3;%time slots
 % [featureset_wind10 , labelset_wind10 ] = TimeSerisFormat(data_wind10 , featurenum_wind,move);
 
 
-
+%% deal with missing values
 for i=1:max(size(data_wind60_ini))
     if isnan(data_wind60_ini(i,1)) == 1
         data_wind60_ini(i,1) = 0.5*(data_wind60_ini(i-1,1) + data_wind60_ini(i+1,1));
@@ -38,10 +38,10 @@ for i=1:max(size(data_wind60_ini))
         data_wind60_ini(i,2) = 0.5*(data_wind60_ini(i-1,2) + data_wind60_ini(i+1,2));
     end
 end
-data_wind60 = data_wind60_ini(:,2).* sind(data_wind60_ini(:,1));
+data_wind60 = data_wind60_ini(:,2).* cosd(data_wind60_ini(:,1));
 
 [featureset_wind60 , labelset_wind60 ] = TimeSerisFormat(data_wind60 , featurenum_wind,move);
-%% deal with missing values
+%% combine data and deal with missing values again
 label = labelset_wind60;
 Totalset = [label,featureset_wind60,featureset_mslp,featureset_temperature];
 Totalset(any(isnan([label,featureset_wind60]),2),:)= [];

@@ -1,4 +1,4 @@
-function [netparameters] = SplitAEtrain( data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,K )
+function [netparameters] = SplitAEtrain( data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,gamma,K )
 %% debug process
 debug = false;
 if debug == true
@@ -39,12 +39,12 @@ theta = initializeParameters(hiddenSize, visibleSize);
 addpath minFunc/
 options = struct;
 options.Method = 'lbfgs'; 
-options.maxIter = 5000;
+options.maxIter = 1;
 options.display = 'on';
 [optTheta, cost] = minFunc( @(p) SplitSparseAutoencoderCost(p, ...
                                    visibleSize, hiddenSize, ...
                                    lambda, sparsityParam, ...
-                                   beta, data,subFeatureNum,K), ...
+                                   beta, data,subFeatureNum,gamma,K), ...
                               theta, options);
 
 %fprintf('Saving learned features and preprocessing matrices...\n');                          
