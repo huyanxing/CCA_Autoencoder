@@ -15,17 +15,17 @@ end
 
 %% No DCCA
 isAE = 1;
-isCRBM =1;
+isCRBM =0;
 Num_cross = 10;
 cross = 1; % the number of runed cross 
-%% CRBM
+
 datatype = 'temp';
-featurenum_mslp = 12;
+featurenum_mslp = 36;
 featurenum_temp = 12;
 featurenum_wind = 12;
 move = 3;
 DataprepareAEandCRBM;
-
+%% AE
 if isAE == 1
     SettingParametersAE;
     netparameters = AEtrain(data,visibleSize,hiddenSize,sparsityParam,lambda ,beta);
@@ -77,7 +77,7 @@ if isAE == 1
         resultsLable{i}.estLabel_ini = estLabel_ini{i};
     end
 end
-
+%% CRBM
 if isCRBM == 1    
     hiddenSize= 5;    
     [model_opt,error]= crbmBB(featureset,hiddenSize);
