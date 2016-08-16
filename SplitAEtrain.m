@@ -39,7 +39,7 @@ theta = initializeParameters(hiddenSize, visibleSize);
 addpath minFunc/
 options = struct;
 options.Method = 'lbfgs'; 
-options.maxIter = 1;
+options.maxIter = 1000;
 options.display = 'on';
 [optTheta, cost] = minFunc( @(p) SplitSparseAutoencoderCost(p, ...
                                    visibleSize, hiddenSize, ...

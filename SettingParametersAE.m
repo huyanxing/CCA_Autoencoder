@@ -1,5 +1,5 @@
           data = featureset;
-          neuronnum = 12;
+          neuronnum = 18;
 %% deal with missing value
           
 
