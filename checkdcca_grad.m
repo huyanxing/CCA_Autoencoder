@@ -19,7 +19,7 @@
 %%
 clc;
 clear;
-settingsparseparameters;
+SettingParametersForChecking;
 %%
 %W1 = reshape(theta(1:hiddenSize*visibleSize), hiddenSize, visibleSize);
 %W2 = reshape(theta(hiddenSize*visibleSize+1:2*hiddenSize*visibleSize), visibleSize, hiddenSize);
@@ -30,10 +30,10 @@ settingsparseparameters;
                                                                    %beta, data), theta);
 
 %W2 = W2(:);
-[cost,grad] = SplitSparseAutoencoderCost(theta,visibleSize, hiddenSize, lambda, sparsityParam, beta, data,subFeatureNum,K);
+[cost,grad] = SplitSparseAutoencoderCost(theta,visibleSize, hiddenSize, lambda, sparsityParam, beta, data,subFeatureNum,gamma,K);
 
 numGrad = computeNumericalGradient( @(x)SplitSparseAutoencoderCost(x,visibleSize, hiddenSize, lambda, sparsityParam,...
-                                                         beta, data,subFeatureNum,K), theta);
+                                                         beta, data,subFeatureNum,gamma,K), theta);
 %%
 
 %%
