@@ -3,17 +3,7 @@ clear;
 
 addpath('./libsvm-3.21/matlab/')
 addpath('./minFunc/' )
-<<<<<<< HEAD
-%% prepare datasets;
-preparedata;% path is :./pareparedata.m
-%% initialize paremeters
-settingsparseparameters;% path is:./settingsparseparameters.m
-%% start training
-netparameters = SplitAEtrain(data,visibleSize,hiddenSize,sparsityParam,lambda ,beta,subFeatureNum,gamma,K);
-opt_feature = getOptFeatures(netparameters.W,netparameters.b, data);
-=======
 addpath('./CRBM')
->>>>>>> 7df7c01ce57b4445411bb1086f2be18e0c3bba5f
 
 isCCA=0;
 
